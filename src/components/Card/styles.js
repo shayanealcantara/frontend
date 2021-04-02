@@ -5,6 +5,7 @@ export const Container = styled(Paper)`
   && {
     padding: 10px;
     border-radius: 5px;
+    max-width: 15vw;
   }
 `;
 
@@ -38,6 +39,5 @@ export const Circle = styled.div`
 export const IndicatorNumber = styled.span`
   font-size: 40px;
   margin: 0px 20px;
-  font-weight: 600,
-
+  font-family: 'Montserrat-SemiBold';
 `;

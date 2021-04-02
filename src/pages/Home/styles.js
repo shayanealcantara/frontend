@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import Paper from '@material-ui/core/Paper';
-
+import colors from '../../styles/colors';
 
 export const Container = styled.div`
   display: flex;
@@ -50,3 +50,17 @@ export const TextCard = styled.span`
   font-family: 'Montserrat-Medium';
   margin-bottom: 20px;
 `;
+
+export const Icon = styled.img`
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+`;
+
+export const InfoText = styled.span`
+  font-size: 18px;
+  color: ${colors.WHITE};
+  text-align: center;
+  margin: 10px 40px;
+`;
+

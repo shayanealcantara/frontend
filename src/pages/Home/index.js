@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { SideBar, SideBarButton, MeasurerCards } from '../../components';
+import { SideBar, SideBarButton, MeasurerCards, SideBarRight } from '../../components';
 import { Img } from '../../assets';
 
-import { Container, Body, Title, BodyCard, TitleCard, TextCard } from './styles';
+import { Container, Body, Title, BodyCard, TitleCard, TextCard, Icon, InfoText } from './styles';
 
 const buttons = [
   {
@@ -58,7 +58,12 @@ const Home = () => {
         </BodyCard>
       </Body>
 
-      <SideBar />
+      <SideBarRight>
+        <>
+            <Icon src={Img.CLOSE} />
+            <InfoText>Não pronto para simulação</InfoText>
+        </>
+      </SideBarRight>
     </Container>
   );
 }
