@@ -24,21 +24,54 @@ const buttons = [
 
 const Home = () => {
   const [selectedId, setSelectedId] = useState(1);
+  const [isPressure, setIsPressure] = useState(true);
 
   return (
     <Container>
       <SideBar>
         <>
-          {buttons.map(item => 
-            <SideBarButton 
-              key={item.id} 
-              icon={item.icon} 
-              selected={item.id === selectedId}
-              onClick={() => setSelectedId(item.id)}
-            >
-              {item.text}
-            </SideBarButton>
-          )}
+        {isPressure ? (
+          <SideBarButton 
+          icon={Img.MONOMETRO} 
+          selected={1 === selectedId}
+          onClick={() => setIsPressure(false)}
+        >
+          Despressurizar câmara
+        </SideBarButton>
+        ):(
+        <>
+          <SideBarButton 
+          icon={Img.MONOMETRO} 
+          selected={2 === selectedId}
+          onClick={() => setIsPressure(true)}
+          >
+            Voltar câmara a pressão ambiente
+          </SideBarButton>
+
+          <SideBarButton 
+          icon={Img.TEST} 
+          selected={3 === selectedId}
+          onClick={() => setSelectedId(3)}
+          >
+            Teste de ciclagem térmica
+          </SideBarButton>
+        </>
+        )}
+          <SideBarButton 
+            icon={Img.SENSOR} 
+            selected={4 === selectedId}
+            onClick={() => setSelectedId(4)}
+          >
+            Sensores
+          </SideBarButton>
+
+          <SideBarButton 
+            icon={Img.HISTORIC} 
+            selected={5 === selectedId}
+            onClick={() => setSelectedId(5)}
+          >
+            Histórico de experimentos
+          </SideBarButton>
         </>
       </SideBar>
       <Body>
