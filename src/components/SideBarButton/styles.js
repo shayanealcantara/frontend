@@ -19,6 +19,7 @@ export const Container = styled.div`
 export const Title = styled.span`
   font-size: 15px;
   color: ${colors.WHITE};
+  flex: 1
 `;
 
 export const Icon = styled.img`

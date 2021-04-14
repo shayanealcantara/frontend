@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Home } from '../pages'
+import { Home, Experiment} from '../pages'
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 const Routes = () => {
@@ -8,6 +8,7 @@ const Routes = () => {
       <Router>
         <Switch>
           <Route path="/" exact component={Home} />
+          <Route path="/experiment" exact component={Experiment} />
         </Switch>
       </Router>
   );

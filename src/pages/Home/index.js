@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { SideBar, SideBarButton, MeasurerCards, SideBarRight } from '../../components';
 import { Img } from '../../assets';
+import { useHistory } from "react-router-dom";
 
 import { Container, Body, Title, BodyCard, TitleCard, TextCard, Icon, InfoText } from './styles';
 
@@ -23,8 +24,9 @@ const buttons = [
 ];
 
 const Home = () => {
-  const [selectedId, setSelectedId] = useState(1);
+  const [selectedId, setSelectedId] = useState(-1);
   const [isPressure, setIsPressure] = useState(true);
+  const history = useHistory();
 
   return (
     <Container>
@@ -32,26 +34,26 @@ const Home = () => {
         <>
         {isPressure ? (
           <SideBarButton 
-          icon={Img.MONOMETRO} 
-          selected={1 === selectedId}
-          onClick={() => setIsPressure(false)}
-        >
+            icon={Img.MONOMETRO} 
+            selected={1 === selectedId}
+            onClick={() => setIsPressure(false)}
+          >
           Despressurizar câmara
         </SideBarButton>
         ):(
         <>
           <SideBarButton 
-          icon={Img.MONOMETRO} 
-          selected={2 === selectedId}
-          onClick={() => setIsPressure(true)}
+            icon={Img.MONOMETRO} 
+            selected={2 === selectedId}
+            onClick={() => setIsPressure(true)}
           >
             Voltar câmara a pressão ambiente
           </SideBarButton>
 
           <SideBarButton 
-          icon={Img.TEST} 
-          selected={3 === selectedId}
-          onClick={() => setSelectedId(3)}
+            icon={Img.TEST} 
+            selected={3 === selectedId}
+            onClick={() => history.push("/home")}
           >
             Teste de ciclagem térmica
           </SideBarButton>
