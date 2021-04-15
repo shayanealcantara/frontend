@@ -3,6 +3,7 @@ const colors = {
   SECONDARY: '#243645',
   GRAY: '#4D575E',
   WHITE: '#ffffff',
+  RED: '#AD2929',
 };
 
 export default colors;

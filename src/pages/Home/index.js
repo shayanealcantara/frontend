@@ -53,7 +53,7 @@ const Home = () => {
           <SideBarButton 
             icon={Img.TEST} 
             selected={3 === selectedId}
-            onClick={() => history.push("/home")}
+            onClick={() => history.push("/experiment")} 
           >
             Teste de ciclagem térmica
           </SideBarButton>
@@ -93,12 +93,17 @@ const Home = () => {
         </BodyCard>
       </Body>
 
-      <SideBarRight>
-        <>
+        {isPressure ? (
+          <SideBarRight>
             <Icon src={Img.CLOSE} />
             <InfoText>Não pronto para simulação</InfoText>
-        </>
-      </SideBarRight>
+          </SideBarRight>
+        ):(
+          <SideBarRight>
+            <Icon src={Img.CHECK} />
+            <InfoText>Pronto para simulação</InfoText>
+          </SideBarRight>
+        )}
     </Container>
   );
 }

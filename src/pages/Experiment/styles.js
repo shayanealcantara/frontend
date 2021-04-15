@@ -77,6 +77,5 @@ export const InfoText = styled.span`
   font-size: 18px;
   color: ${colors.WHITE};
   text-align: center;
-  margin: 10px 40px;
+  margin: 10px 40px 20px;
 `;
-

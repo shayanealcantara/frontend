@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { SideBar, SideBarButton, MeasurerCards, SideBarRight, Button, InputForm } from '../../components';
+import { SideBar, SideBarButton, MeasurerCards, SideBarRight, Button, InputForm, RedButton } from '../../components';
 import { Img } from '../../assets';
 import Switch from './SwitchButton';
+import Progress from './Progress';
+import { useHistory } from "react-router-dom";
 
 import { 
   Container, 
@@ -13,7 +15,7 @@ import {
   Icon, 
   InfoText, 
   ContextCard,
-  ContainerForm 
+  ContainerForm,
 } from './styles';
 
 
@@ -27,6 +29,7 @@ const Experiment = () => {
   const [durMin, setDurMin] = useState('');
   const [cicleHot, setCicleHot] = useState('');
   const [cicleCold, setCicleCold] = useState('');
+  const history = useHistory();
 
   return (
     <Container>
@@ -53,6 +56,7 @@ const Experiment = () => {
           >
             Ligar a lâmpada solar
           </SideBarButton>
+
           <SideBarButton 
             icon={Img.SENSOR} 
             selected={3 === selectedId}
@@ -68,13 +72,21 @@ const Experiment = () => {
           >
             Histórico de experimentos
           </SideBarButton>
+            
+          <RedButton
+            // TODO: only appear when the test is running          
+            selected={5 === selectedId}
+            onClick={() => history.push("/experiment")} 
+          >
+            Cancelar experimento 
+          </RedButton>
+          
         </>
       </SideBar>
       <Body>
-        <Title>Painel de Monitoramento de Testes</Title>
+        <Title>Teste de Ciclagem Térmica</Title>
         <MeasurerCards />
         
-
         {!isTest && (
           <BodyCard>
             <ContextCard>
@@ -146,13 +158,26 @@ const Experiment = () => {
 
           <Button style={{alignSelf: 'center', marginTop: 20}} onClick={() => setIsTest(true)}>Iniciar Teste</Button>
         </ContainerForm>
-
+        
+        <BodyCard>
+          <ContextCard>
+            <TitleCard>Teste em andamento</TitleCard>
+              <TextCard>
+                Aguarde enquanto o teste está sendo executado.
+              </TextCard>
+          <Progress />
+          </ContextCard>
+        </BodyCard>
+        
       </Body>
 
       <SideBarRight>
         <>
-            <Icon src={Img.CLOSE} />
-            <InfoText>Não pronto para simulação</InfoText>
+            <Icon src={Img.CHECK} />
+            <InfoText>Pronto para simulação</InfoText>
+
+            <Icon src={Img.CHRONOMETER} />
+            <InfoText>00:00:00</InfoText>
         </>
       </SideBarRight>
     </Container>
