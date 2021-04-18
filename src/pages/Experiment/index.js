@@ -68,7 +68,7 @@ const Experiment = () => {
           <SideBarButton 
             icon={Img.HISTORIC} 
             selected={4 === selectedId}
-            onClick={() => setSelectedId(4)}
+            onClick={() => history.push("/history")} 
           >
             Histórico de experimentos
           </SideBarButton>
@@ -170,16 +170,21 @@ const Experiment = () => {
         </BodyCard>
         
       </Body>
-
-      <SideBarRight>
-        <>
+        
+        {isTest ? (
+          <SideBarRight>
+            <Icon src={Img.PROGRESS} />
+            <InfoText>Em andamento</InfoText>
+          </SideBarRight>
+        ):(
+          <SideBarRight>
             <Icon src={Img.CHECK} />
             <InfoText>Pronto para simulação</InfoText>
-
-            <Icon src={Img.CHRONOMETER} />
-            <InfoText>00:00:00</InfoText>
-        </>
-      </SideBarRight>
+          </SideBarRight>
+        )}
+        {/* TODO: include chronometer in sidebar right */} 
+          {/* <Icon src={Img.CHRONOMETER} />
+          <InfoText>00:00:00</InfoText> */}
     </Container>
   );
 }

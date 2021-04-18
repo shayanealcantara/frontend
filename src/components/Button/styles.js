@@ -13,6 +13,7 @@ export const ButtonContainer = styled(Button)`
     padding: 10px 100px;
     border-radius: 10px;
     height: 48px;
+    font-family: 'Montserrat';
   }
   &&:hover {
     background-color: ${colors.PRIMARY};

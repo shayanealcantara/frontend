@@ -7,6 +7,7 @@ import CHECK from './check.png';
 import CHRONOMETER from './chronometer.png';
 import FLASHLIGHT from './flashlight.png';
 import TEST from './test.png';
+import PROGRESS from './progress.png';
 
 export default {
   LOGO,
@@ -18,4 +19,5 @@ export default {
   CHRONOMETER,
   FLASHLIGHT,
   TEST,
+  PROGRESS,
 };

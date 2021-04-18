@@ -70,7 +70,7 @@ const Home = () => {
           <SideBarButton 
             icon={Img.HISTORIC} 
             selected={5 === selectedId}
-            onClick={() => setSelectedId(5)}
+            onClick={() => history.push("/history")} 
           >
             Histórico de experimentos
           </SideBarButton>
