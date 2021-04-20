@@ -3,7 +3,7 @@ import { SideBar, SideBarButton, Button } from '../../components';
 import { useHistory } from "react-router-dom";
 import { Img } from '../../assets';
 import Switch from '../Experiment/SwitchButton';
-import DialogRotation from './DialogRotation';
+import { DialogRotation } from '../../components';
 
 import { 
   Container, 
@@ -17,23 +17,20 @@ import {
 
 const History = () => {
   const [selectedId, setSelectedId] = useState(-1);
-  const [isTest, setIsTest] = useState(false);
   const [checked, setChecked] = useState(false);
+  const [open, setOpen] = useState(false);
   const history = useHistory();
 
   return (
     <Container>
       <SideBar>
       <>
-      {/* TODO: Change or fix rotation button*/}
           <SideBarButton 
-            button={
-              <DialogRotation
-                checked={checked}
-                onChange={() => setChecked(!checked)}
-              />
-            }
+            icon={Img.MONOMETRO} 
+            selected={1 === selectedId}
+            onClick={() => setOpen(true)}
           >
+            Definir rotação
           </SideBarButton>
 
           <SideBarButton 
@@ -74,7 +71,7 @@ const History = () => {
         <ExperimentTitle>experimento-25-02-2021</ExperimentTitle>
 
         {/* TODO: Redirect to previous page */}
-        <Button style={{width: 20, marginBottom: 10, backgroundColor: '#C4C4C4', color: 'black'}} onClick={() => setIsTest(true)}>Voltar</Button>
+        <Button style={{width: 20, marginBottom: 10, backgroundColor: '#C4C4C4', color: 'black'}} onClick={() => history.goBack()}>Voltar</Button>
         
         <BodyCard>
             <TextCard>Duração transiente com temperatura baixa: 00:10:00</TextCard>
@@ -88,8 +85,10 @@ const History = () => {
         </BodyCard>
         
         {/* TODO: Export data */}
-        <Button style={{width: 20, alignSelf: 'end', marginTop: 10, backgroundColor: '#4c7291'}} onClick={() => setIsTest(true)}>Exportar</Button>
+        <Button style={{width: 20, alignSelf: 'end', marginTop: 10, backgroundColor: '#4c7291'}} onClick={() => history.goBack()}>Exportar</Button>
       </Body>
+
+      <DialogRotation open={open} setOpen={setOpen} />
     </Container>
   );
 }

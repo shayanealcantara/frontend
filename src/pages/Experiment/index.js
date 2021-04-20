@@ -4,7 +4,7 @@ import { Img } from '../../assets';
 import Switch from './SwitchButton';
 import Progress from './Progress';
 import { useHistory } from "react-router-dom";
-
+import { DialogAlert } from '../../components'
 import { 
   Container, 
   Body, 
@@ -21,8 +21,10 @@ import {
 
 const Experiment = () => {
   const [selectedId, setSelectedId] = useState(-1);
-  const [isTest, setIsTest] = useState(false);
+  const [isProceed, setIsProceed] = useState(false);
+  const [isTestProgress, setIsTestProgress] = useState(false);
   const [checked, setChecked] = useState(false);
+  const [open, setOpen] = useState(false);
   const [maxTemp, setMaxTemp] = useState('');
   const [mimTemp, setMinTemp] = useState('');
   const [durMax, setDurMax] = useState('');
@@ -73,21 +75,24 @@ const Experiment = () => {
             Histórico de experimentos
           </SideBarButton>
             
-          <RedButton
-            // TODO: only appear when the test is running          
-            selected={5 === selectedId}
-            onClick={() => history.push("/experiment")} 
-          >
-            Cancelar experimento 
-          </RedButton>
-          
+          {isTestProgress && (
+            <RedButton
+              selected={5 === selectedId}
+              onClick={() => {
+                setIsProceed(false);
+                setIsTestProgress(false);
+              }} 
+            >
+              Cancelar experimento 
+            </RedButton>
+          )}
         </>
       </SideBar>
       <Body>
         <Title>Teste de Ciclagem Térmica</Title>
         <MeasurerCards />
         
-        {!isTest && (
+        {!isProceed && !isTestProgress && (
           <BodyCard>
             <ContextCard>
               <TitleCard>Orientações</TitleCard>
@@ -101,80 +106,101 @@ const Experiment = () => {
               </TextCard>
             </ContextCard>
 
-            <Button style={{width: 40, alignSelf: 'center'}} onClick={() => setIsTest(true)}>Prosseguir</Button>
+            <Button 
+              style={{width: 40, alignSelf: 'center'}} 
+              onClick={() => {
+                setIsProceed(true);
+              }}>
+                Prosseguir
+              </Button>
           </BodyCard>
         )}
 
-        <ContainerForm>
-          <TitleCard>Protocolo de teste</TitleCard>
-  
-          <InputForm
-            label='Temperatura máxima (em ºC)'
-            placeholder='Valor'
-            value={maxTemp}
-            onChange={(e) =>
-              setMaxTemp(e.target.value.replace(/\D/,''))}
-          />
-          
-          <InputForm
-            label='Duração com temperatura máxima (em min):'
-            placeholder='Duração'
-            value={durMax}
-            onChange={(e) =>
-              setDurMax(e.target.value.replace(/\D/,''))}
-          />
+        {isProceed && !isTestProgress && (
+          <ContainerForm>
+            <TitleCard>Protocolo de teste</TitleCard>
+    
+            <InputForm
+              label='Temperatura máxima (em ºC)'
+              placeholder='Valor'
+              value={maxTemp}
+              onChange={(e) =>
+                setMaxTemp(e.target.value.replace(/\D/,''))}
+            />
+            
+            <InputForm
+              label='Duração com temperatura máxima (em min):'
+              placeholder='Duração'
+              value={durMax}
+              onChange={(e) =>
+                setDurMax(e.target.value.replace(/\D/,''))}
+            />
 
-          <InputForm
-            label='Temperatura mínima (em ºC)'
-            placeholder='Valor'
-            value={mimTemp}
-            onChange={(e) =>
-              setMinTemp(e.target.value.replace(/\D/,''))}
-          />
-          
-          <InputForm
-            label='Duração com temperatura mínima (em min):'
-            placeholder='Duração'
-            value={durMin}
-            onChange={(e) =>
-              setDurMin(e.target.value.replace(/\D/,''))}
-          />
+            <InputForm
+              label='Temperatura mínima (em ºC)'
+              placeholder='Valor'
+              value={mimTemp}
+              onChange={(e) =>
+                setMinTemp(e.target.value.replace(/\D/,''))}
+            />
+            
+            <InputForm
+              label='Duração com temperatura mínima (em min):'
+              placeholder='Duração'
+              value={durMin}
+              onChange={(e) =>
+                setDurMin(e.target.value.replace(/\D/,''))}
+            />
 
-          <InputForm
-            label='Quantidade de ciclos quentes (em unidades):'
-            placeholder='Quantidade'
-            value={cicleHot}
-            onChange={(e) =>
-              setCicleHot(e.target.value.replace(/\D/,''))}
-          />
+            <InputForm
+              label='Quantidade de ciclos quentes (em unidades):'
+              placeholder='Quantidade'
+              value={cicleHot}
+              onChange={(e) =>
+                setCicleHot(e.target.value.replace(/\D/,''))}
+            />
 
-          <InputForm
-            label='Quantidade de ciclos frios (em unidades):'
-            placeholder='Quantidade'
-            value={cicleCold}
-            onChange={(e) =>
-              setCicleCold(e.target.value.replace(/\D/,''))}
-          />
+            <InputForm
+              label='Quantidade de ciclos frios (em unidades):'
+              placeholder='Quantidade'
+              value={cicleCold}
+              onChange={(e) =>
+                setCicleCold(e.target.value.replace(/\D/,''))}
+            />
 
-          <Button style={{alignSelf: 'center', marginTop: 20}} onClick={() => setIsTest(true)}>Iniciar Teste</Button>
-        </ContainerForm>
-        
-        <BodyCard>
-          <ContextCard>
-            <TitleCard>Teste em andamento</TitleCard>
-              <TextCard>
-                Aguarde enquanto o teste está sendo executado.
-              </TextCard>
-          <Progress />
-          </ContextCard>
-        </BodyCard>
+            <Button 
+              style={{alignSelf: 'center', marginTop: 20}} 
+              onClick={() => {
+                setIsTestProgress(true);
+                setIsProceed(false);
+                setOpen(true)
+                // setTimeout(()=> setOpen(true), 5000);
+              }}>
+                Iniciar Teste
+            </Button>
+          </ContainerForm>
+        )}
+
+        {isTestProgress && (
+          <BodyCard>
+            <ContextCard>
+              <TitleCard>Teste em andamento</TitleCard>
+                <TextCard>
+                  Aguarde enquanto o teste está sendo executado.
+                </TextCard>
+            {/* <Progress /> */}
+            </ContextCard>
+          </BodyCard>
+        )}
         
       </Body>
         
-        {isTest ? (
+        {isTestProgress ? (
           <SideBarRight>
             <Icon src={Img.PROGRESS} />
             <InfoText>Em andamento</InfoText>
+            <Icon src={Img.CHRONOMETER} />
+            <InfoText>00:00:00</InfoText>
           </SideBarRight>
         ):(
           <SideBarRight>
@@ -182,9 +208,8 @@ const Experiment = () => {
             <InfoText>Pronto para simulação</InfoText>
           </SideBarRight>
         )}
-        {/* TODO: include chronometer in sidebar right */} 
-          {/* <Icon src={Img.CHRONOMETER} />
-          <InfoText>00:00:00</InfoText> */}
+
+      <DialogAlert open={open} setOpen={setOpen}/>
     </Container>
   );
 }

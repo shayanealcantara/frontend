@@ -6,3 +6,5 @@ export { default as SideBarButton } from './SideBarButton';
 export { default as Card } from './Card';
 export { default as MeasurerCards } from './MeasurerCards';
 export { default as RedButton } from './RedButton';
+export { default as DialogRotation } from './DialogRotation';
+export { default as DialogAlert } from './DialogAlert';
