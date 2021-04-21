@@ -1,0 +1,26 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches: 
+      - main
+      - release/*
+      
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  buildAndTest:
+    name: Build and Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Build
+        run: yarn build
+
+      - name: Test
+        run: yarn test --watchAll=false
