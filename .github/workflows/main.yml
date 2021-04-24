@@ -5,18 +5,25 @@ on:
     branches: 
       - main
       - release/*
+  pull_request:
+    branches: 
+    - main
+    - release/*
+    
 jobs:
-  buildAndTest:
-    name: Build and Test
+  frontend:
+  
     runs-on: ubuntu-latest
+    
     steps:
-      - uses: actions/checkout@v2
+    - uses: actions/checkout@v1
+    - uses: actions/setup-node@v1
+    
+    - name: Build environment
+      run: docker-compose up -d --build
+    
+#     - name: Run environment
+#       run: docker-compose up
 
-      - name: Install dependencies
-        run: yarn
-
-      - name: Build
-        run: yarn build
-
-      - name: Test
-        run: yarn test --watchAll=false
+    - name: Test
+      run: yarn test --watchAll=false
